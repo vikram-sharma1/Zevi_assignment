@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styles/ProductPage.css'
 import { AiOutlineDown } from 'react-icons/ai';
+import { AiTwotoneHeart } from 'react-icons/ai';
 import { useState } from 'react';
 import Rating from '@mui/material/Rating'
+import axios from 'axios';
 
 const ProductPage = () => {
 
     const [brand, setBrand] = useState(true)
     const [price, setPrice] = useState(true)
     const [ratings, setRatings] = useState(true)
-
-   
+    const [data, setData] = useState([])
+    const [wish, setWish] = useState(true)
+    
+    useEffect(()=>{
+        FetchData()
+    },[])
 
     const changeStatus1 = () => {
         if(brand == true){
@@ -38,6 +44,26 @@ const ProductPage = () => {
         }
     }
 
+    const FetchData = () => {
+        axios.get(`https://fake-ecommerce-server.herokuapp.com/products`).then((res)=>{
+            // console.log(res.data)
+            setData(res.data)
+        }).catch((err)=>{
+             console.log('err:', err)
+
+        })
+    }
+
+    const colorChange = () => {
+        if(wish == true){
+            setWish(false)
+        }
+        else{
+            setWish(true)
+        }
+
+    }
+
   return (
     <>
         <div id='mainBox'>
@@ -52,16 +78,19 @@ const ProductPage = () => {
                         </div>
                         <div className='Brandnames' style={{display : brand? "block" : "none"}}>
                             <input type="checkbox" name="" id="" /> 
-                            <label htmlFor="">Mango</label>
+                            <label htmlFor="">Men's</label>
                                 <br />
                             <input type="checkbox" name="" id="" /> 
-                            <label htmlFor="">H & M</label>
+                            <label htmlFor="">Women's</label>
                                 <br />
                             <input type="checkbox" name="" id="" /> 
-                            <label htmlFor="">H & M</label>
+                            <label htmlFor="">Bags</label>
                                 <br />
                             <input type="checkbox" name="" id="" /> 
-                            <label htmlFor="">H & M</label>
+                            <label htmlFor="">Jewellery</label>
+                                <br />
+                            <input type="checkbox" name="" id="" /> 
+                            <label htmlFor="">Electronics</label>
                         </div>
                     </div>
                     <div className='brandBox'>
@@ -84,7 +113,7 @@ const ProductPage = () => {
                         </div>
                         <div className='Brandnames' style={{display : ratings? "block" : "none"}}>
                             <input type="checkbox" name="" id="" /> 
-                            <label htmlFor=""><Rating name="read-only" value='5' readOnly /></label>
+                            <label htmlFor=""><Rating name="read-only" value='4'  readOnly /></label>
                                 <br />
                             <input type="checkbox" name="" id="" /> 
                             <label htmlFor=""><Rating name="read-only" value='4' readOnly /></label>
@@ -99,10 +128,20 @@ const ProductPage = () => {
                             <label htmlFor=""><Rating name="read-only" value='1' readOnly /></label>
                         </div>
                     </div>
-
-
                 </div>
                 <div className='two'>
+                    {data.map((el)=>{
+                        return(
+                            <div key={el.id}>
+                                <AiTwotoneHeart id='wishlistLogo'/>
+                                <AiTwotoneHeart className='wishlistLogored'/>
+                                <img src={el.image} alt="" className='productImg' />
+                                <h4>{el.title}</h4>
+                                <p>Rs. {el.price}</p>
+                                <p><Rating name="half-rating-read" defaultValue={el.rating.rate} precision={0.5} readOnly /> ({el.rating.count})</p>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </div>
