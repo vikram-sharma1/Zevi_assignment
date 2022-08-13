@@ -1,0 +1,47 @@
+#mainBox{
+    padding: 20px;
+}
+.postiontop{
+    position: fixed;
+
+}
+.allProductBox{
+    display: flex;
+    gap: 10px;
+    margin-top: 5%;
+}
+
+.one{
+    border: 1px solid black;
+    /* flex: 1; */
+    height: 600px;
+    width: 15%;
+    position: fixed;
+}
+.two{
+    border: 1px solid black;
+    /* flex: 5; */
+    height: 900px;
+    width: 85%;
+    margin-left: 16%;
+}
+.brandBox{
+    /* border: 1px solid black; */
+    padding-left: 10px;
+
+}
+.flexing{
+    display: flex;
+    /* border: 1px solid black; */
+}
+.flexing > h3:nth-child(1){
+    flex: 4;
+}
+.flexing > h3:nth-child(2){
+    flex: 1;
+    /* font-weight: ; */
+}
+.Brandnames{
+    font-size: 18px;
+    line-height: 27px;
+}
