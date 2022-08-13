@@ -1,0 +1,28 @@
+.homeBackground{
+    border: 5px solid transparent;
+    height: 740px;
+    background-image:url('../images/home\ logo.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.searchBox{
+    /* border: 2px solid black; */
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+    height: 10%;
+}
+.input{
+    width: 80%;
+    height: 70%;
+    border-radius: 15px;
+    background-color: white;
+    font-size: 25px;
+    padding: 5px 70px 5px 10px;
+}
+#searchLogo{
+    font-size: 35px;
+    position: relative;
+    top: 10px;
+    left: -50px;
+}
